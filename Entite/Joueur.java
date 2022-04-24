@@ -50,7 +50,7 @@ public class Joueur implements Entite {
     }
 
     public void attaquer() {
-        if (mouvement.flèche) {
+        if (mouvement.fleche) {
             if (this.nbrCourantFleche != this.nbrMaxFleche) {
                 nbrCourantFleche ++;
                 int i=0;
