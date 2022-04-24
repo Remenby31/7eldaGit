@@ -6,6 +6,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import Entite.Objet;
+import Main.InventairePleinException;
+import Main.Jeu;
 
 public class Inventaire {
 		
@@ -44,12 +46,12 @@ public class Inventaire {
 				this.tousLesObjets[1] = new Objet();
 				this.tousLesObjets[1].dansInv = false;
 				this.tousLesObjets[1].ind = 1;
-				this.tousLesObjets[1].image = ImageIO.read(getClass().getResourceAsStream("/Ressources/epee.png"));
+				this.tousLesObjets[1].image = ImageIO.read(getClass().getResourceAsStream("/ressources_entite/epee.png"));
 				
 				this.tousLesObjets[0] = new Objet();
 				this.tousLesObjets[0].dansInv = false;
 				this.tousLesObjets[0].ind = 0;
-				this.tousLesObjets[0].image = ImageIO.read(getClass().getResourceAsStream("/Ressources/vide.png"));
+				this.tousLesObjets[0].image = ImageIO.read(getClass().getResourceAsStream("/ressources_entite/vide.png"));
 				
 			} catch (IOException e) {
 				e.printStackTrace();

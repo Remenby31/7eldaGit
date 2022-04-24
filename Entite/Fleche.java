@@ -9,7 +9,7 @@ import Main.*;
 public class Fleche implements Entite{
     public int x,y;
     private Entite entite;
-    private BufferedImage flèche_droite, flèche_gauche, flèche_haut, flèche_bas, image;
+    private BufferedImage fleche_droite, fleche_gauche, fleche_haut, fleche_bas, image;
     private boolean estPresent;
     private int vitesse = 6;
     private Direction direction;
@@ -25,22 +25,22 @@ public class Fleche implements Entite{
             case DROITE :
                 this.x = entite.getX() + 32;
                 this.y = entite.getY();
-                image = flèche_droite;
+                image = fleche_droite;
                 break;
             case GAUCHE : 
                 this.x = entite.getX() - 32;
                 this.y = entite.getY();
-                image = flèche_gauche;
+                image = fleche_gauche;
                 break;
             case HAUT : 
                 this.x = entite.getX();
                 this.y = entite.getY() - 32;
-                image = flèche_haut;
+                image = fleche_haut;
                 break;
             case BAS : 
                 this.x = entite.getX();
                 this.y = entite.getY() + 32;
-                image = flèche_bas;
+                image = fleche_bas;
                 break;
         }
         //afficher flèche
@@ -105,10 +105,10 @@ public class Fleche implements Entite{
     
     private void getImage() {
         try {
-            flèche_gauche = ImageIO.read(getClass().getResourceAsStream("/ressources/flèche_gauche.png"));
-            flèche_bas = ImageIO.read(getClass().getResourceAsStream("/ressources/flèche_bas.png"));
-            flèche_droite = ImageIO.read(getClass().getResourceAsStream("/ressources/flèche_droite.png"));
-            flèche_haut = ImageIO.read(getClass().getResourceAsStream("/ressources/flèche_haut.png"));
+            fleche_gauche = ImageIO.read(getClass().getResourceAsStream("/ressources_entite/flèche_gauche.png"));
+            fleche_bas = ImageIO.read(getClass().getResourceAsStream("/ressources_entite/flèche_bas.png"));
+            fleche_droite = ImageIO.read(getClass().getResourceAsStream("/ressources_entite/flèche_droite.png"));
+            fleche_haut = ImageIO.read(getClass().getResourceAsStream("/ressources_entite/flèche_haut.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
 
 public class ControleClavier implements KeyListener{
 
-	public boolean haut, bas, gauche, droite, flèche;
+	public boolean haut, bas, gauche, droite, fleche;
 	public boolean inv = false;
 	public boolean give = false;
 	@Override
@@ -43,7 +43,7 @@ public class ControleClavier implements KeyListener{
 		}
 		
 		if(codeTouche == KeyEvent.VK_E) {
-			flèche = true;
+			fleche = true;
 		}
 
 	}
@@ -74,7 +74,7 @@ public class ControleClavier implements KeyListener{
 		}
 		
 		if(codeTouche == KeyEvent.VK_E) {
-			flèche = false;
+			fleche = false;
 		}
 		
 	}

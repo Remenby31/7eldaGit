@@ -46,14 +46,14 @@ public class Ennemi1 implements Entite {
 
 	private void getImage() {
 		try {
-			Avant_marche1 = ImageIO.read(getClass().getResourceAsStream("/ressources/blop_Avant_marche1.png"));
-	        Avant_static = ImageIO.read(getClass().getResourceAsStream("/ressources/blop_Avant_static.png"));
-	        Derriere_marche1 = ImageIO.read(getClass().getResourceAsStream("/ressources/blop_Derriere_marche1.png"));
-	        Derriere_static = ImageIO.read(getClass().getResourceAsStream("/ressources/blop_Derriere_static.png"));
-	        Droite_marche = ImageIO.read(getClass().getResourceAsStream("/ressources/blop_Droite_marche.png"));
-	        Droit_static = ImageIO.read(getClass().getResourceAsStream("/ressources/blop_Droite_static.png"));
-	        Gauche_static = ImageIO.read(getClass().getResourceAsStream("/ressources/blop_Gauche_static.png"));
-	        Gauche_marche = ImageIO.read(getClass().getResourceAsStream("/ressources/blop_Gauche_marche.png"));
+			Avant_marche1 = ImageIO.read(getClass().getResourceAsStream("/ressources_entite/blop_Avant_marche1.png"));
+	        Avant_static = ImageIO.read(getClass().getResourceAsStream("/ressources_entite/blop_Avant_static.png"));
+	        Derriere_marche1 = ImageIO.read(getClass().getResourceAsStream("/ressources_entite/blop_Derriere_marche1.png"));
+	        Derriere_static = ImageIO.read(getClass().getResourceAsStream("/ressources_entite/blop_Derriere_static.png"));
+	        Droite_marche = ImageIO.read(getClass().getResourceAsStream("/ressources_entite/blop_Droite_marche.png"));
+	        Droit_static = ImageIO.read(getClass().getResourceAsStream("/ressources_entite/blop_Droite_static.png"));
+	        Gauche_static = ImageIO.read(getClass().getResourceAsStream("/ressources_entite/blop_Gauche_static.png"));
+	        Gauche_marche = ImageIO.read(getClass().getResourceAsStream("/ressources_entite/blop_Gauche_marche.png"));
 	    } catch (IOException e) {
 	    	e.printStackTrace();
 	    }

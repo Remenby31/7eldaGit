@@ -1,21 +1,23 @@
-package map;
+package Map;
 
 import java.awt.Graphics;
 import java.io.BufferedReader;
-
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import Main.Jeu;
 
-public class ModeleMap {
+public class ModeleMap implements Salle{
 	private Jeu jeu;
 	public Map[] map;
 	public int[][] coordonneeMap;//Créer une matrice qui sera les coordonnées sur la map
-	
 	
 	public ModeleMap(Jeu jeu) {
 		this.jeu = jeu;
@@ -24,7 +26,8 @@ public class ModeleMap {
 		coordonneeMap = new int [jeu.maxCol][jeu.maxLigne];
 		creerMap();
 	}
-
+	
+	@Override
 	public void getTexture() {
 		try {
 			map[0] = new Map();
@@ -47,7 +50,7 @@ public class ModeleMap {
 			map[4].collision = true;
 			
 			map[5] = new Map();
-			map[5].image = ImageIO.read(ModeleMap.class.getResource("/ressources/coin_gauche.png")); 
+			map[5].image = ImageIO.read(ModeleMap.class.getResource("/ressources/eclairagebis_haut.png")); 
 			
 			map[6] = new Map();
 			map[6].image = ImageIO.read(ModeleMap.class.getResource("/ressources/eclairage.png")); 
@@ -64,14 +67,14 @@ public class ModeleMap {
 			
 			map[10] = new Map();
 			map[10].image = ImageIO.read(ModeleMap.class.getResource("/ressources/porte_bas.png")); 
-			map[10].collision = true;
+			map[10].collision_porte = true;
 			
 			map[11] = new Map();
 			map[11].image = ImageIO.read(ModeleMap.class.getResource("/ressources/obstacle.png")); 
 			map[11].collision = true;
 			
 			map[12] = new Map();
-			map[12].image = ImageIO.read(ModeleMap.class.getResource("/ressources/portecube11(1).png")); 
+			map[12].image = ImageIO.read(ModeleMap.class.getResource("/ressources/portecube11.png")); 
 
 			map[13] = new Map();
 			map[13].image = ImageIO.read(ModeleMap.class.getResource("/ressources/portecube12.png")); 
@@ -96,7 +99,7 @@ public class ModeleMap {
 			map[18].image = ImageIO.read(ModeleMap.class.getResource("/ressources/mur_cotegauche_1.png")); 
 			
 			map[19] = new Map();
-			map[19].image = ImageIO.read(ModeleMap.class.getResource("/ressources/mur_cotegauche_2(1).png")); 
+			map[19].image = ImageIO.read(ModeleMap.class.getResource("/ressources/mur_cotegauche_2.png")); 
 			
 			map[20] = new Map();
 			map[20].image = ImageIO.read(ModeleMap.class.getResource("/ressources/mur_cotegauche_3.png")); 
@@ -114,7 +117,7 @@ public class ModeleMap {
 			map[24].image = ImageIO.read(ModeleMap.class.getResource("/ressources/mur_cotegauche_7.png")); 
 			
 			map[25] = new Map();
-			map[25].image = ImageIO.read(ModeleMap.class.getResource("/ressources/portecube11(2).png")); 
+			map[25].image = ImageIO.read(ModeleMap.class.getResource("/ressources/mur_de_base.png")); 
 			
 			map[26] = new Map();
 			map[26].image = ImageIO.read(ModeleMap.class.getResource("/ressources/mur_cotedroit_1.png")); 
@@ -183,15 +186,24 @@ public class ModeleMap {
 			map[46] = new Map();
 			map[46].image = ImageIO.read(ModeleMap.class.getResource("/ressources/coin_haut_gauche_2.png"));
 			
+			
 			for (int k = 1; k<47; k++) {
 				map[k].collision = true;
+				map[k].collision_porteb = false;
+				map[k].collision_portec = false;
+				map[k].collision_ported = false;
 			}
 			
+			//Enlever la collision sur les deux blocs de la porte 
+			map[12].collision =false;
+			map[13].collision = false;
 		}catch(IOException e) {
 			System.out.print("Le fichier est inexistant");
 		}
 		
 	}
+	
+	@Override
 	public void creerMap()  {
 		//Permet de lire le fichier txt
 		InputStream carte = getClass().getResourceAsStream("/ressources/carte.txt");
@@ -227,6 +239,7 @@ public class ModeleMap {
 		}
 	}
 	
+	@Override
 	public void dessiner(Graphics graphique) {
 		
 		int cube_pos_x =0;
@@ -250,4 +263,16 @@ public class ModeleMap {
 			
 		}
 	}
+	
+	public Map[] getMap() {
+		return this.map;
+	}
+	
+	public int[][] getCoordonneeMap () {
+		return this.coordonneeMap;
+	}
+	
+	
+	
+	
 }

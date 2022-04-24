@@ -4,7 +4,13 @@ import Entite.*;
 
 public class Collision {
 	Jeu jeu;
-	
+	public boolean lancer_salle2 = false;
+	public boolean lancer_ModeleMap = false;
+	public boolean lancer_salle3 = false;
+	public boolean lancer_ModeleMap2 = false;
+
+
+
 	public Collision(Jeu jeu) {
 		this.jeu = jeu;
 	}
@@ -24,36 +30,72 @@ public class Collision {
 		int faceDroitColonne = faceDroit/jeu.tailleCaseReelle;
 		
 		
+
+		
+		
 		int coin1, coin2;
 		if (joueur.getDirection() == Direction.HAUT) {
 			faceHautLigne = (faceHaut - joueur.getVitesse())/jeu.tailleCaseReelle;
-			coin1 = jeu.map.coordonneeMap[faceGaucheColonne][faceHautLigne];
-			coin2 = jeu.map.coordonneeMap[faceDroitColonne][faceHautLigne];
-			if (jeu.map.map[coin1].collision == true || jeu.map.map[coin2].collision == true) {
+			coin1 = jeu.salle.getSalle().getCoordonneeMap()[faceGaucheColonne][faceHautLigne];
+			coin2 = jeu.salle.getSalle().getCoordonneeMap()[faceDroitColonne][faceHautLigne];
+			if(jeu.salle.getSalle().getMap()[coin1].collision_portec == true || jeu.salle.getSalle().getMap()[coin2].collision_portec == true) {
+				lancer_salle2 = false;
+				lancer_ModeleMap = false;
+				lancer_ModeleMap2 = false;
+				lancer_salle3 = true;
+			
+				
+			}
+			
+			if (jeu.salle.getSalle().getMap()[coin1].collision == true || jeu.salle.getSalle().getMap()[coin2].collision == true) {
 				return true;
 			}
 		}
 		else if(joueur.getDirection() == Direction.BAS) {
 			faceBasLigne = (faceBas + joueur.getVitesse())/jeu.tailleCaseReelle;
-			coin1 = jeu.map.coordonneeMap[faceGaucheColonne][faceBasLigne];
-			coin2 = jeu.map.coordonneeMap[faceDroitColonne][faceBasLigne];
-			if (jeu.map.map[coin1].collision == true || jeu.map.map[coin2].collision == true) {
+			coin1 = jeu.salle.getSalle().getCoordonneeMap()[faceGaucheColonne][faceBasLigne];
+			coin2 = jeu.salle.getSalle().getCoordonneeMap()[faceDroitColonne][faceBasLigne];
+			if(jeu.salle.getSalle().getMap()[coin1].collision_porte == true || jeu.salle.getSalle().getMap()[coin2].collision_porte == true) {
+				lancer_ModeleMap = false;
+				lancer_salle3 = false;
+				lancer_ModeleMap2 = false;
+				lancer_salle2 = true;
+				
+				
+			}
+			
+			
+		if(jeu.salle.getSalle().getMap()[coin1].collision_porteb == true || jeu.salle.getSalle().getMap()[coin2].collision_porteb == true) {
+			lancer_salle2 = false;
+			lancer_salle3 = false;
+			lancer_ModeleMap2 = false;
+			lancer_ModeleMap = true;
+	}
+		if(jeu.salle.getSalle().getMap()[coin1].collision_ported == true || jeu.salle.getSalle().getMap()[coin2].collision_ported == true) {
+			lancer_salle2 = false;
+			lancer_ModeleMap = false;
+			lancer_salle3 = false;
+			lancer_ModeleMap2 = true;
+	}
+
+			if (jeu.salle.getSalle().getMap()[coin1].collision == true || jeu.salle.getSalle().getMap()[coin2].collision == true) {
 				return true;
 			}
+			
 		}
 		else if (joueur.getDirection() == Direction.DROITE) {
 			faceDroitColonne = (faceDroit + joueur.getVitesse())/jeu.tailleCaseReelle;
-			coin1 = jeu.map.coordonneeMap[faceDroitColonne][faceHautLigne];
-			coin2 = jeu.map.coordonneeMap[faceDroitColonne][faceBasLigne];
-			if (jeu.map.map[coin1].collision == true || jeu.map.map[coin2].collision == true) {
+			coin1 = jeu.salle.getSalle().getCoordonneeMap()[faceDroitColonne][faceHautLigne];
+			coin2 = jeu.salle.getSalle().getCoordonneeMap()[faceDroitColonne][faceBasLigne];
+			if (jeu.salle.getSalle().getMap()[coin1].collision == true || jeu.salle.getSalle().getMap()[coin2].collision == true) {
 				return true;
 			}
 		}
 		else if (joueur.getDirection() == Direction.GAUCHE) {
 			faceGaucheColonne = (faceGauche - joueur.getVitesse())/jeu.tailleCaseReelle;
-			coin1 = jeu.map.coordonneeMap[faceGaucheColonne][faceHautLigne];
-			coin2 = jeu.map.coordonneeMap[faceGaucheColonne][faceBasLigne];
-			if (jeu.map.map[coin1].collision == true || jeu.map.map[coin2].collision == true) {
+			coin1 = jeu.salle.getSalle().getCoordonneeMap()[faceGaucheColonne][faceHautLigne];
+			coin2 = jeu.salle.getSalle().getCoordonneeMap()[faceGaucheColonne][faceBasLigne];
+			if (jeu.salle.getSalle().getMap()[coin1].collision == true || jeu.salle.getSalle().getMap()[coin2].collision == true) {
 				return true;
 			}
 		} 

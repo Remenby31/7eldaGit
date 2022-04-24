@@ -7,7 +7,11 @@ import javax.swing.JPanel;
 
 import Entite.Ennemi1;
 import Entite.Joueur;
-import map.ModeleMap;
+import Map.Importationsalle;
+import Map.ModeleMap;
+import Map.ModeleMap2;
+import Map.Salle;
+import Map.Salle2;
 
 public class Jeu extends JPanel implements Runnable {
 
@@ -19,7 +23,7 @@ public class Jeu extends JPanel implements Runnable {
 	public final int maxLigne = 12; // Nombre de cases en ligne
 	public final int largeurEcran = 1024; // Taille de la fenêtre en largeur
 	public final int hauteurEcran = 750; // Taille de la fenêtre en hauteur
-	public final int IPS = 60; // Images par seconde
+	public final int IPS = 70; // Images par seconde
 
 	/** Etat de jeu (JEU - PAUSE - INVENTAIRE) */
 	enum EtatJeu {
@@ -27,18 +31,18 @@ public class Jeu extends JPanel implements Runnable {
 	};
 
 	public static EtatJeu etatJeu = EtatJeu.EN_JEU;
-
-	// added by mohamed
+	public Inventaire inv;
 	public Collision collisionVerificateur = new Collision(this);
 
 	// Definir la carte du jeu
-	ModeleMap map = new ModeleMap(this);
-
+	public ModeleMap map = new ModeleMap(this);
+	public Salle2 salle2 = new Salle2(this);
+	public Importationsalle salle  =  new Importationsalle(new ModeleMap(this));
+	public Salle sallec;
 	// Paramètre joueur
 	ControleClavier gestionnaireTouche = new ControleClavier();
 
 	// Définir la collision
-	public Inventaire inv;
 	Collision collision = new Collision(this);
 	public Ennemi1 ennemi1 = new Ennemi1(this);
 	public Joueur joueur = new Joueur(this, gestionnaireTouche);
@@ -96,24 +100,75 @@ public class Jeu extends JPanel implements Runnable {
 		
 	}
 
-	// Affichage (tous les éléments qui seront affichés devront contenir une méthode
-	// afficher)
-	public void paintComponent(Graphics graphique) {
-		super.paintComponent(graphique);
-		Graphics2D graphique2D = (Graphics2D) graphique;
-		
-		/** Affichage des elements du jeu */
-		map.dessiner(graphique2D);
-		joueur.afficher(graphique2D);
-		ennemi1.afficher(graphique2D);
-		gui.afficher(graphique2D);
+	// Affichage (tous les �l�ments qui seront affich�s devront contenir une m�thode
+		// afficher)
+		public void paintComponent(Graphics graphique) {
+			super.paintComponent(graphique);
+			Graphics2D graphique2D = (Graphics2D) graphique;
+			/** Affichage des elements du jeu */
+			//salle2.dessiner(graphique2D);
+			
+			salle = new Importationsalle(new ModeleMap(this)); 
+			salle.getSalle().dessiner(graphique2D);
+			joueur.afficher(graphique2D);
+			ennemi1.afficher(graphique2D);
+			gui.afficher(graphique2D);
+			
+			if(collisionVerificateur.lancer_salle2==true) {
+				//map.map[11].collision = false;
+				salle = new Importationsalle(new Salle2(this));
+				sallec =salle.getSalle();
+				salle.getSalle().dessiner(graphique2D);
+				joueur.afficher(graphique2D);
+				
+				
+				
+			}
+			
+			if(collisionVerificateur.lancer_salle3==true) {
+				//map.map[11].collision = false;
+				salle = new Importationsalle(new ModeleMap2(this));
+				sallec =salle.getSalle();
+				salle.getSalle().dessiner(graphique2D);
+				joueur.afficher(graphique2D);
+				
+				
+				
+			}
+			
+			if(collisionVerificateur.lancer_ModeleMap == true) {
+				salle = new Importationsalle(new ModeleMap(this));
+				salle.getSalle().dessiner(graphique2D);
+				joueur.afficher(graphique2D);
+				ennemi1.afficher(graphique2D);
+				gui.afficher(graphique2D);
 
-		/** Affichage de l'inventaire */
-		if (etatJeu == EtatJeu.INVENTAIRE) {
-			gui.afficherInventaire(graphique2D, joueur.inv);
 
-			if (joueur.mouvement.give) {gui.inv.ajouterObjet(gui.inv.tousLesObjets[1]);} //Triche de Christophe
-		}
-		graphique2D.dispose();
-	}
+			}
+			
+
+			if(collisionVerificateur.lancer_ModeleMap2 == true) {
+				salle = new Importationsalle(new Salle2(this));
+				sallec =salle.getSalle();
+				salle.getSalle().dessiner(graphique2D);
+				joueur.afficher(graphique2D);
+				ennemi1.afficher(graphique2D);
+				gui.afficher(graphique2D);
+				
+
+			}
+			
+			
+			
+			/** Affichage de l'inventaire */
+			if (etatJeu == EtatJeu.INVENTAIRE) {
+				gui.afficherInventaire(graphique2D, joueur.inv);
+
+				if (joueur.mouvement.give) {gui.inv.ajouterObjet(gui.inv.tousLesObjets[1]);} //Triche de Christophe
+			}
+			
+			graphique2D.dispose();
+			
+			}
 }
+
