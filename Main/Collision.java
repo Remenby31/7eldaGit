@@ -1,6 +1,7 @@
 package Main;
 
 import Entite.*;
+import java.awt.Point;
 
 public class Collision {
 	Jeu jeu;
@@ -100,5 +101,26 @@ public class Collision {
 			}
 		} 
 		return false;
+	}
+
+	static boolean PointDedans(Entite e, Point p) {
+		if ((p.getX() > e.getX() - e.getHitbox_X()/2) && (p.getX() < e.getX() + e.getHitbox_X()/2) && (p.getY() < e.getY() + e.getHitbox_Y()/2) && (p.getY() > e.getY() - e.getHitbox_Y()/2)) {
+			return true;
+		}
+		return false;
+	}
+
+	public static boolean collisionJoueur(Joueur joueur, Entite e) {
+
+		Point droit = new Point(e.getX() + e.getHitbox_X()/2, e.getY());
+		Point gauche = new Point(e.getX() - e.getHitbox_X()/2, e.getY());
+		Point bas = new Point(e.getX(), e.getY() - e.getHitbox_Y()/2);
+		Point haut = new Point(e.getX(), e.getY() + e.getHitbox_Y()/2);
+
+		if (PointDedans(joueur, droit) || PointDedans(joueur, gauche) || PointDedans(joueur, bas) || PointDedans(joueur, haut) ) {
+			return true;
+		}
+		return false;
+		
 	}
 }
