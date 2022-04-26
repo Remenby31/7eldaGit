@@ -7,7 +7,12 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Joueur implements Entite {
-    private int x,y, hitX=25, hitY=64, nbrCourantFleche;
+
+    /* Attribut Entite */
+    private int x, y;
+    private Hitbox hitbox;
+
+    /* Affichage */
     public ControleClavier mouvement;
     public Jeu jeu;
     public int vitesse = 3;
@@ -19,10 +24,12 @@ public class Joueur implements Entite {
     public double CoeurMax = 4;
     private Vie vie;
     private Fleche tabFleche[];
-    public int nbrMaxFleche = 25;
+    public int nbrMaxFleche = 25, nbrCourantFleche;
+    
 
 
     public Joueur(Jeu jeu, ControleClavier mouvement) {
+        this.hitbox = new Hitbox(this,-15, 66, 50, -13); 
         this.nbrCourantFleche = 0;
         this.vie = new Vie(this);
         this.x = 420;
@@ -32,7 +39,7 @@ public class Joueur implements Entite {
         getImage();
         this.deplacement = "bas";
         this.changement_texture = 2;
-        this.inv = new Inventaire(10, 10, jeu.tailleCaseReelle * 5 + 15, jeu.tailleCaseReelle * 4);
+        this.inv = new Inventaire(10, 10, Jeu.tailleCaseReelle * 5 + 15, Jeu.tailleCaseReelle * 4);
         this.tabFleche = new Fleche[nbrMaxFleche];
         for (int i=0; i< nbrMaxFleche; i++) {
             tabFleche[i] = null;
@@ -67,9 +74,7 @@ public class Joueur implements Entite {
     
     public int getY() { return this.y; }
 
-    public int getHitbox_X() {return this.hitX;}
-
-	public int getHitbox_Y() {return this.hitY;}
+    public Hitbox getHitbox() { return this.hitbox; }
 
     /**Update les coordonn�es
      * @param x Correspond au d�placement selon x
@@ -110,7 +115,7 @@ public class Joueur implements Entite {
     public void afficher(Graphics2D g) {
         //afficher la vie du joueur 
         vie.afficher(g);
-        
+        hitbox.afficher(g);
         this.afficherJoueur(g);
         // Afficher toute les flèches courantes
         for (int i=0; i< nbrMaxFleche; i++) {
@@ -206,7 +211,9 @@ public class Joueur implements Entite {
             break;
         }
 
-        g.drawImage(image, this.x, this.y, jeu.tailleCaseReelle, jeu.tailleCaseReelle, null);
+        g.drawImage(image, this.x, this.y, Jeu.tailleCaseReelle, Jeu.tailleCaseReelle, null);
+
+        /* Dessiner les Hitbox */
 
     }
 

@@ -16,9 +16,9 @@ import Map.Salle2;
 public class Jeu extends JPanel implements Runnable {
 
 	/** Paramètres Ecran */
-	public final int tailleCaseDeBase = 32; // Textures en 32 X 32
-	public final int echelle = 2;
-	public final int tailleCaseReelle = tailleCaseDeBase * echelle; // Taille à l'écran
+	public final static int tailleCaseDeBase = 32; // Textures en 32 X 32
+	public final static int echelle = 2;
+	public final static int tailleCaseReelle = tailleCaseDeBase * echelle; // Taille à l'écran
 	public final int maxCol = 16; // Nombre de cases en colonne
 	public final int maxLigne = 12; // Nombre de cases en ligne
 	public final int largeurEcran = 1024; // Taille de la fenêtre en largeur
@@ -56,6 +56,11 @@ public class Jeu extends JPanel implements Runnable {
 		this.setFocusable(true);
 		this.requestFocusInWindow();
 
+	}
+
+	/* Getteur du joueur (pour les ennemis) */
+	public Joueur getJoueur() {
+		return joueur;
 	}
 
 	// Création de la boucle

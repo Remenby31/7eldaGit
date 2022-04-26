@@ -11,13 +11,18 @@ import java.io.IOException;
 
 public class Ennemi1 implements Entite {
 	
+	/* Attribut Entite */
+	private int x, y, vitesse;
+	private Hitbox hitbox; 
+	
+	/* Affichage */
 	public int compteurImage = 0;
 	public int numeroImage = 1;
 	public Jeu jeu;
 	public int pdv;
 	public boolean vivant;
-	private int x, y , hitX = 32, hitY = 32;
-	public int vitesse;
+	
+	
 	public int dir;
 	public int lastDir = 1;
 	public Random r;
@@ -25,27 +30,27 @@ public class Ennemi1 implements Entite {
 	private int update;
 	
 	public Ennemi1(Jeu jeu) {
+		this.hitbox = new Hitbox(this,-35, 66, 50, -13); 
 		this.jeu = jeu;
 		this.pdv = 3;
 		this.vivant = true;
-		this.x = 300;
+		this.x = 500;
 		this.y = 300;
-		this.vitesse = 2;
+		this.vitesse = 0;
 		this.r = new Random();
 		this.dir = getRandomNumberInRange(1, 4);
 		getImage();
 	}
-	public int getVitesse() {
-        return this.vitesse;
-    }
+
+	public int getVitesse() { return this.vitesse; }
 
 	public int getX() { return this.x; }
     
     public int getY() { return this.y; }
 
-	public int getHitbox_X() {return this.hitX;}
+	public Hitbox getHitbox() { return this.hitbox; }
 
-	public int getHitbox_Y() {return this.hitY;}
+	public boolean estPresent() { return vivant; }
 
 	private void getImage() {
 		try {
@@ -61,11 +66,6 @@ public class Ennemi1 implements Entite {
 	    	e.printStackTrace();
 	    }
 }
-
-	@Override
-	public boolean estPresent() {
-		return vivant;
-	}
 	
 	@Override
 	public void afficher(Graphics2D g) {
@@ -115,16 +115,26 @@ public class Ennemi1 implements Entite {
 				break;
 			}
 		}
-		g.drawImage(image, x, y, jeu.tailleCaseReelle, jeu.tailleCaseReelle, null);
+
+		hitbox.afficher(g);
+		g.drawImage(image, x, y, Jeu.tailleCaseReelle, Jeu.tailleCaseReelle, null);
 		
 	}
 
 	@Override
 	public void miseAJour() {
+
+		/* Collision */
 		if (Collision.collisionJoueur(jeu.getJoueur(), this)) {
 			System.out.println("Collisison");
 		} else {
+			System.out.println("--");
 		}
+		
+
+		/* Deplacement [Mode aléatoire] */
+		//int old_x = this.x, old_y = this.y;
+
 		if (update >= 150) {
 			update = 0;
 			dir = getRandomNumberInRange(1,5);
@@ -134,19 +144,19 @@ public class Ennemi1 implements Entite {
 		}
 		switch(dir) {
 		case 1 :
-			//this.x += vitesse;
+			this.x += vitesse;
 			update += 1;
 			break;
 		case 2 :
-			//this.y += vitesse;
+			this.y += vitesse;
 			update += 1;
 			break;
 		case 3 :
-			//this.x -= vitesse;
+			this.x -= vitesse;
 			update += 1;
 			break;
 		case 4 :
-			//this.y -= vitesse;
+			this.y -= vitesse;
 			update += 1;
 			break;
 		default :
@@ -162,7 +172,7 @@ public class Ennemi1 implements Entite {
 				numeroImage = 1;
 			}
 			compteurImage = 0;
-		}	
+		}
 	}
 	
 	private int getRandomNumberInRange(int min, int max) {
@@ -177,5 +187,6 @@ public class Ennemi1 implements Entite {
 		}
 		return Direction.BAS;
 	}
+
 	
 }

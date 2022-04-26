@@ -7,7 +7,6 @@ import javax.imageio.ImageIO;
 
 import Entite.Objet;
 import Main.InventairePleinException;
-import Main.Jeu;
 
 public class Inventaire {
 		

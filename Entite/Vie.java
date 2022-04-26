@@ -1,4 +1,5 @@
 package Entite;
+import Main.*;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -77,11 +78,11 @@ public class Vie {
         int i = 1;
         while (i <= e.CoeurMax) {
             if (i <= x/1) {
-                g.drawImage(Coeur_plein, (i - 1)*e.jeu.tailleCaseDeBase,0, null);
+                g.drawImage(Coeur_plein, (i - 1)*Jeu.tailleCaseDeBase,0, null);
             } else if ((int) Math.ceil(x) != x/1 && i == (int) Math.ceil(x)) {
-                g.drawImage(Coeur_moitie, (i - 1)*e.jeu.tailleCaseDeBase,0, null);
+                g.drawImage(Coeur_moitie, (i - 1)*Jeu.tailleCaseDeBase,0, null);
             } else {
-                g.drawImage(Coeur_vide, (i - 1)*e.jeu.tailleCaseDeBase,0, null);
+                g.drawImage(Coeur_vide, (i - 1)*Jeu.tailleCaseDeBase,0, null);
             }
             i ++; 
         }
@@ -89,9 +90,9 @@ public class Vie {
 
     private void getImage() {
         try {
-        Coeur_plein = ImageIO.read(getClass().getResourceAsStream("/ressources/Coeur_plein.png"));
-        Coeur_moitie = ImageIO.read(getClass().getResourceAsStream("/ressources/Coeur_moitie.png"));
-        Coeur_vide = ImageIO.read(getClass().getResourceAsStream("/ressources/Coeur_vide.png"));
+        Coeur_plein = ImageIO.read(getClass().getResourceAsStream("/ressources_entite/Coeur_plein.png"));
+        Coeur_moitie = ImageIO.read(getClass().getResourceAsStream("/ressources_entite/Coeur_moitie.png"));
+        Coeur_vide = ImageIO.read(getClass().getResourceAsStream("/ressources_entite/Coeur_vide.png"));
         } catch (IOException e) {
             System.out.println("Problème dans les fichiers reliée a la vie");
         }
