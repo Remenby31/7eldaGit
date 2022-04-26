@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 import Main.*;
 
 public class Fleche implements Entite{
-    public int x,y;
+    public int x, y , hitX, hitY;
     private Entite entite;
     private BufferedImage fleche_droite, fleche_gauche, fleche_haut, fleche_bas, image;
     private boolean estPresent;
@@ -76,6 +76,16 @@ public class Fleche implements Entite{
         return this.y;
     }
 
+    @Override
+    public int getHitbox_X() {
+        return this.hitX;
+    }
+
+    @Override
+	public int getHitbox_Y() {
+        return this.hitY;
+    }
+
     public void miseAJour() {
         if (this.estPresent) {
             if (!jeu.collisionVerificateur.verifierCollision(this)){
@@ -105,10 +115,10 @@ public class Fleche implements Entite{
     
     private void getImage() {
         try {
-            fleche_gauche = ImageIO.read(getClass().getResourceAsStream("/ressources_entite/flèche_gauche.png"));
-            fleche_bas = ImageIO.read(getClass().getResourceAsStream("/ressources_entite/flèche_bas.png"));
-            fleche_droite = ImageIO.read(getClass().getResourceAsStream("/ressources_entite/flèche_droite.png"));
-            fleche_haut = ImageIO.read(getClass().getResourceAsStream("/ressources_entite/flèche_haut.png"));
+            fleche_gauche = ImageIO.read(getClass().getResourceAsStream("/ressources_entite/fleche_gauche.png"));
+            fleche_bas = ImageIO.read(getClass().getResourceAsStream("/ressources_entite/fleche_bas.png"));
+            fleche_droite = ImageIO.read(getClass().getResourceAsStream("/ressources_entite/fleche_droite.png"));
+            fleche_haut = ImageIO.read(getClass().getResourceAsStream("/ressources_entite/fleche_haut.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

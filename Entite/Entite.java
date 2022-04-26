@@ -18,4 +18,9 @@ public interface Entite {
     public int getX();
 
     public int getY();
+    
+    public int getHitbox_X();
+
+    public int getHitbox_Y();
+
 }
