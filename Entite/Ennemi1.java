@@ -16,8 +16,7 @@ public class Ennemi1 implements Entite {
 	public Jeu jeu;
 	public int pdv;
 	public boolean vivant;
-	private int x;
-	private int y;
+	private int x, y , hitX = 32, hitY = 32;
 	public int vitesse;
 	public int dir;
 	public int lastDir = 1;
@@ -43,6 +42,10 @@ public class Ennemi1 implements Entite {
 	public int getX() { return this.x; }
     
     public int getY() { return this.y; }
+
+	public int getHitbox_X() {return this.hitX;}
+
+	public int getHitbox_Y() {return this.hitY;}
 
 	private void getImage() {
 		try {
@@ -118,6 +121,10 @@ public class Ennemi1 implements Entite {
 
 	@Override
 	public void miseAJour() {
+		if (Collision.collisionJoueur(jeu.getJoueur(), this)) {
+			System.out.println("Collisison");
+		} else {
+		}
 		if (update >= 150) {
 			update = 0;
 			dir = getRandomNumberInRange(1,5);
@@ -127,19 +134,19 @@ public class Ennemi1 implements Entite {
 		}
 		switch(dir) {
 		case 1 :
-			this.x += vitesse;
+			//this.x += vitesse;
 			update += 1;
 			break;
 		case 2 :
-			this.y += vitesse;
+			//this.y += vitesse;
 			update += 1;
 			break;
 		case 3 :
-			this.x -= vitesse;
+			//this.x -= vitesse;
 			update += 1;
 			break;
 		case 4 :
-			this.y -= vitesse;
+			//this.y -= vitesse;
 			update += 1;
 			break;
 		default :
