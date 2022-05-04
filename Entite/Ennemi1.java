@@ -16,6 +16,7 @@ public class Ennemi1 implements Entite {
 	private Hitbox hitbox; 
 	private double CoeurMax = 1;
 
+	/* Vie */
 	
 	/* Affichage */
 	public int compteurImage = 0;
@@ -132,6 +133,8 @@ public class Ennemi1 implements Entite {
 		/* Collision */
 		if (Collision.collisionJoueur(jeu.getJoueur(), this)) {
 			System.out.println("Collisison avec " + this.getClass().toString());
+			jeu.getJoueur().SubitDegat(0.5);
+
 			
 		} else {
 			System.out.println("--");

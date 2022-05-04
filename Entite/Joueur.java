@@ -15,6 +15,8 @@ public class Joueur implements Entite {
 
     /* Vie */
     private Vie vie = new Vie(this);
+    private long cooldown = 1000;
+    private long tempsAttente;
 
     /* Affichage */
     public ControleClavier mouvement;
@@ -48,7 +50,15 @@ public class Joueur implements Entite {
 
     }
 
-    @Override
+    public void SubitDegat(double degat) {
+        if (tempsAttente - System.currentTimeMillis() < 0) {
+            tempsAttente = System.currentTimeMillis() + cooldown;
+            vie.degat(degat);
+        } else {
+            System.out.println("Inivisible");
+        }
+    }
+
     public boolean estPresent() {
         return vie.getVie() != 0 ;
     }
@@ -78,6 +88,8 @@ public class Joueur implements Entite {
     public Hitbox getHitbox() { return this.hitbox; }
 
     public double getCoeurMax() { return this.CoeurMax; }
+
+    public Vie getVieJoueur() { return this.vie; }
 
     /**Update les coordonn�es
      * @param x Correspond au d�placement selon x
