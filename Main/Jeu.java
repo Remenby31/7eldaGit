@@ -42,11 +42,12 @@ public class Jeu extends JPanel implements Runnable {
 	// Paramètre joueur
 	ControleClavier gestionnaireTouche = new ControleClavier();
 
-	// Définir la collision
+	// Collision + Entite + GUI
 	Collision collision = new Collision(this);
 	public Ennemi1 ennemi1 = new Ennemi1(this);
 	public Joueur joueur = new Joueur(this, gestionnaireTouche);
 	public GUI gui = new GUI(this, joueur);
+
 
 	// Création du "jeu"
 	public Jeu() {
@@ -133,7 +134,7 @@ public class Jeu extends JPanel implements Runnable {
 			if(collisionVerificateur.lancer_salle3==true) {
 				//map.map[11].collision = false;
 				salle = new Importationsalle(new ModeleMap2(this));
-				sallec =salle.getSalle();
+				sallec = salle.getSalle();
 				salle.getSalle().dessiner(graphique2D);
 				joueur.afficher(graphique2D);
 				

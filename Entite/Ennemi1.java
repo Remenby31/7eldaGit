@@ -14,6 +14,8 @@ public class Ennemi1 implements Entite {
 	/* Attribut Entite */
 	private int x, y, vitesse;
 	private Hitbox hitbox; 
+	private double CoeurMax = 1;
+
 	
 	/* Affichage */
 	public int compteurImage = 0;
@@ -36,7 +38,7 @@ public class Ennemi1 implements Entite {
 		this.vivant = true;
 		this.x = 500;
 		this.y = 300;
-		this.vitesse = 0;
+		this.vitesse = 1;
 		this.r = new Random();
 		this.dir = getRandomNumberInRange(1, 4);
 		getImage();
@@ -51,6 +53,9 @@ public class Ennemi1 implements Entite {
 	public Hitbox getHitbox() { return this.hitbox; }
 
 	public boolean estPresent() { return vivant; }
+
+	public double getCoeurMax() { return this.CoeurMax; }
+
 
 	private void getImage() {
 		try {
@@ -126,14 +131,14 @@ public class Ennemi1 implements Entite {
 
 		/* Collision */
 		if (Collision.collisionJoueur(jeu.getJoueur(), this)) {
-			System.out.println("Collisison");
+			System.out.println("Collisison avec " + this.getClass().toString());
+			
 		} else {
 			System.out.println("--");
 		}
 		
 
 		/* Deplacement [Mode aléatoire] */
-		//int old_x = this.x, old_y = this.y;
 
 		if (update >= 150) {
 			update = 0;
@@ -161,6 +166,7 @@ public class Ennemi1 implements Entite {
 			break;
 		default :
 			update += 1;
+
 		}
 		
 		compteurImage ++;

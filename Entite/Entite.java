@@ -16,6 +16,8 @@ public interface Entite {
 
     public int getVitesse();
 
+    public double getCoeurMax();
+
     public int getX();
 
     public int getY();

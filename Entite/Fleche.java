@@ -9,6 +9,7 @@ import Main.*;
 public class Fleche implements Entite{
     public int x, y;
     private Hitbox hitbox;
+    private double CoeurMax = 0;
 
     private Entite entite;
     private BufferedImage fleche_droite, fleche_gauche, fleche_haut, fleche_bas, image;
@@ -67,6 +68,9 @@ public class Fleche implements Entite{
 	public Hitbox getHitbox() { return this.hitbox; }
 
     public boolean estPresent() { return estPresent; }
+
+    public double getCoeurMax() { return this.CoeurMax; }
+
 
 
     public void miseAJour() {

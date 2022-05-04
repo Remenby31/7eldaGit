@@ -11,6 +11,10 @@ public class Joueur implements Entite {
     /* Attribut Entite */
     private int x, y;
     private Hitbox hitbox;
+    private double CoeurMax = 4;
+
+    /* Vie */
+    private Vie vie = new Vie(this);
 
     /* Affichage */
     public ControleClavier mouvement;
@@ -21,8 +25,6 @@ public class Joueur implements Entite {
     private int changement_texture, compteur;
     private String deplacement;
     public Inventaire inv;
-    public double CoeurMax = 4;
-    private Vie vie;
     private Fleche tabFleche[];
     public int nbrMaxFleche = 25, nbrCourantFleche;
     
@@ -31,7 +33,6 @@ public class Joueur implements Entite {
     public Joueur(Jeu jeu, ControleClavier mouvement) {
         this.hitbox = new Hitbox(this,-15, 66, 50, -13); 
         this.nbrCourantFleche = 0;
-        this.vie = new Vie(this);
         this.x = 420;
         this.y = 320 ;
         this.jeu = jeu;
@@ -76,14 +77,13 @@ public class Joueur implements Entite {
 
     public Hitbox getHitbox() { return this.hitbox; }
 
+    public double getCoeurMax() { return this.CoeurMax; }
+
     /**Update les coordonn�es
      * @param x Correspond au d�placement selon x
      * @param y Correspond au d�placement selon y
      */
     public void miseAJour() {
-        //Mise a jour de la vie du joueur
-        vie.miseAJour();
-        
         //Mise a jour de toutes les flèches courantes
         for (int i=0; i< nbrMaxFleche; i++) {
             if (tabFleche[i] != null) {
@@ -113,10 +113,9 @@ public class Joueur implements Entite {
 
     }
     public void afficher(Graphics2D g) {
-        //afficher la vie du joueur 
-        vie.afficher(g);
-        hitbox.afficher(g);
-        this.afficherJoueur(g);
+        vie.afficher(g); // afficher la vie du joueur 
+        hitbox.afficher(g); // afficher la hitbox du joueur 
+        this.afficherJoueur(g); //// afficher le joueur 
         // Afficher toute les flèches courantes
         for (int i=0; i< nbrMaxFleche; i++) {
             if (tabFleche[i] != null) {
